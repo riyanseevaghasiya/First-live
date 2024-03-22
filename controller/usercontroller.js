@@ -3,36 +3,38 @@ var bcrypt = require("bcrypt");
 
 exports.insert = async (req, res) => {
   
+  var B_pass = await bcrypt.hash(req.body.pass, 10);
+
+  req.body.pass = B_pass;
+
   var data = await usermodel.create(req.body);
   res.status(200).json({
     data,
-    status:'data-insert...✅'
+    status: "data-insert...✅",
   });
 };
 
 exports.getdata = async (req, res) => {
-    var data = await usermodel.find();
-    res.status(200).json({
-      data,
-      status:'shoow the data...'
-    });
-  };
+  var data = await usermodel.find();
+  res.status(200).json({
+    data,
+    status: "shoow the data...",
+  });
+};
 
-  exports.update = async (req, res) => {
-    var id = req.params.id;
-    var data = await usermodel.findByIdAndUpdate(id,req.body);
-    res.status(200).json({
-      data,
-      status:'data-update...✅'
-    });
-  };
-  exports.delet = async (req, res) => {
-    var id = req.params.id;
-    var data = await usermodel.findByIdAndDelete(id,req.body);
-    res.status(200).json({
-      data,
-      status:'data-delet...✅'
-    });
-  };
-
-  
+exports.update = async (req, res) => {
+  var id = req.params.id;
+  var data = await usermodel.findByIdAndUpdate(id, req.body);
+  res.status(200).json({
+    data,
+    status: "data-update...✅",
+  });
+};
+exports.delet = async (req, res) => {
+  var id = req.params.id;
+  var data = await usermodel.findByIdAndDelete(id, req.body);
+  res.status(200).json({
+    data,
+    status: "data-delet...✅",
+  });
+};

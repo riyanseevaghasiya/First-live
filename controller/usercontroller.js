@@ -2,11 +2,9 @@ var usermodel = require("../model/usermodel");
 var bcrypt = require("bcrypt");
 
 exports.insert = async (req, res) => {
-  
-  var B_pass = await bcrypt.hash(req.body.pass, 10);
 
-  req.body.pass = B_pass;
-
+  var Bcrypt_pass = await bcrypt.hash(req.body.pass, 10);
+  req.body.pass = Bcrypt_pass;
   var data = await usermodel.create(req.body);
   res.status(200).json({
     data,
